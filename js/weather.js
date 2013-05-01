@@ -42,9 +42,13 @@ $(function() {
     };
     
     var displayWeatherData = function(){
+		if (!currentWeather.response.error) {
         $resultsData.html(
             "Temp: " + currentWeather.current_observation.temperature_string + "<br />" +
             "Wind: " + currentWeather.current_observation.wind_string + " " + currentWeather.current_observation.wind_mph + " MPH (" + currentWeather.current_observation.wind_kph + " KPH) <br />"
-        );        
+        ); 
+		}else {
+		$resultsData.html(currentWeather.response.error.description);
+		}
     };
 });
