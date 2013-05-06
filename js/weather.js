@@ -53,9 +53,14 @@ $(function() {
     var displayWeatherData = function(){
 		if (!currentWeather.response.error) {
         $resultsData.html(
+<<<<<<< HEAD
 			"<h2>Current Conditions for: " + currentWeather.current_observation.display_location.full + "</h2>" +
             "<b>Temp: </b>" + currentWeather.current_observation.temperature_string + "<br />" +
             "<b>Wind: </b>" + currentWeather.current_observation.wind_string + ": " + currentWeather.current_observation.wind_mph + " MPH (" + currentWeather.current_observation.wind_kph + " KPH) <br />"
+=======
+            "Temp: " + currentWeather.current_observation.temperature_string + "<br />" +
+            "Wind: " + currentWeather.current_observation.wind_string + " " + currentWeather.current_observation.wind_mph + " MPH (" + currentWeather.current_observation.wind_kph + " KPH) <br />"
+>>>>>>> 1264e3361526dd1f15a8731b3998c5722a3b34de
         ); 
 		}else {
 		$resultsData.html(currentWeather.response.error.description);
