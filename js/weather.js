@@ -2,9 +2,8 @@ $(function() {
 
     // Parsed JSON object containing current condiditons
     var currentWeather;
-	var currentWeather2;
 	var latitude;
-	 var longitude
+	var longitude
 
     // Reference to form
     $weather = $('#weather');
@@ -23,15 +22,13 @@ $(function() {
     var weatherData = function(latitude, longitude) {
         apiKey = "88e6f4a82f7771eb";
         /*url = "http://weather-api.herokuapp.com/weather/" + apiKey + "/conditions/z/" + zipCode;*/
-             url = "http://weather-api.herokuapp.com/weather/" + apiKey + "/conditions/g/" + latitude + "/" + longitude;  
+        url = "http://weather-api.herokuapp.com/weather/" + apiKey + "/conditions/g/" + latitude + "/" + longitude;  
 			
 		
         $.ajax({
             url: url,			
             success: function(data) {
-                currentWeather = JSON.parse(data);
-					console.log(data);
-					
+                currentWeather = JSON.parse(data);		
                 displayWeatherData();
             },
             error: function() {
@@ -53,37 +50,30 @@ $(function() {
     var displayWeatherData = function(){
 		if (!currentWeather.response.error) {
         $resultsData.html(
-<<<<<<< HEAD
 			"<h2>Current Conditions for: " + currentWeather.current_observation.display_location.full + "</h2>" +
             "<b>Temp: </b>" + currentWeather.current_observation.temperature_string + "<br />" +
             "<b>Wind: </b>" + currentWeather.current_observation.wind_string + ": " + currentWeather.current_observation.wind_mph + " MPH (" + currentWeather.current_observation.wind_kph + " KPH) <br />"
-=======
-            "Temp: " + currentWeather.current_observation.temperature_string + "<br />" +
-            "Wind: " + currentWeather.current_observation.wind_string + " " + currentWeather.current_observation.wind_mph + " MPH (" + currentWeather.current_observation.wind_kph + " KPH) <br />"
->>>>>>> 1264e3361526dd1f15a8731b3998c5722a3b34de
+
         ); 
 		}else {
-		$resultsData.html(currentWeather.response.error.description);
+			$resultsData.html(currentWeather.response.error.description);
 		}
     };
 	
 	var input = document.getElementById('cityState');
 	var options = {
 	types: ['(cities)'],
-  componentRestrictions: {country: 'us'}
+	componentRestrictions: {country: 'us'}
 };
 
 	autocomplete = new google.maps.places.Autocomplete(input, options);
 	//console.log(autocomplete);
 	
-	google.maps.event.addListener(autocomplete, 'place_changed', function() {
- 
-    var place = autocomplete.getPlace();
-	
-	  latitude = place.geometry.location.lat();
-	 longitude = place.geometry.location.lng();   
- 	  
-	});
+	google.maps.event.addListener(autocomplete, 'place_changed', function() { 
+		var place = autocomplete.getPlace();
+		latitude = place.geometry.location.lat();
+		longitude = place.geometry.location.lng(); 
+ 	});
 	
 	var getWeatherResults = function() {
 		weatherData(latitude, longitude);
